@@ -1,24 +1,28 @@
 ---
 - hosts: localhost
-  become_user: ubuntuvm
+  become_user: rosedu
   become: yes
 
   tasks:
-  - name: Clone robotiq repository
+  - name: Create mascor_ws/src directory
+    file: path={{ ansible_env.HOME }}/mascor_ws/src state=directory 
+
+  - name: Clone ur repository
     git:
-      repo: 'https://github.com/nlimpert/robotiq.git'
-      dest: '{{ ansible_env.HOME }}/robotiq'
+      repo: 'git@git.fh-aachen.de:maskor/rosin/ur.git'
+      dest: '{{ ansible_env.HOME }}/mascor_ws/src/ur'
       force: yes
       recursive: no
       accept_hostkey: yes
       update: yes
-    register: robotiq
+      version: master
+    register: ur
 
     #  - name: Create crontab entry to clone/pull git repository
     #    template: src=templates/testfile.j2 dest={{ ansible_env.HOME }}/Desktop/testfile owner=root group=root mode=0644
 
-  - name: remove file from desktop
-    file:
-      state: absent
-      path: "{{ ansible_env.HOME }}/Desktop/testfile"
+    #  - name: remove file from desktop
+    #    file:
+    #      state: absent
+    #      path: "{{ ansible_env.HOME }}/Desktop/testfile"
 
