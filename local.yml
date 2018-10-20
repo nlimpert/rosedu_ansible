@@ -1,5 +1,8 @@
 ---
 - hosts: localhost
+  roles:
+    - ansible_pull
+
   become_user: rosedu
   become: yes
 
