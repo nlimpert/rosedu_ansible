@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+
+  tasks:
+  - name: Clone Fawkes repository
+    git:
+      repo: 'https://github.com/nlimpert/robotiq.git'
+      dest: '{{ ansible_env.HOME }}/robotiq'
+      force: yes
+      recursive: no
+      accept_hostkey: yes
+      update: yes
+    register: robotiq
+
