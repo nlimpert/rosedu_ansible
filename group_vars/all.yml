@@ -1,0 +1,18 @@
+---
+
+schedule: '*/15 * * * *'
+cron_user: root
+logfile: /var/log/ansible-pull.log
+workdir: /var/lib/ansible/local
+repo_url: https://github.com/nlimpert/rosin_ansible.git
+
+ansible_user: rosedu
+mascor_workspace: ~/mascor_ws
+training_workspace: ~/training_ws
+update_system: 0
+clean_build: 0
+network_prefix_24: 172.26.108
+fast_deploy: 0
+enable_firewall: 0
+alternative_hostnames: []
+git_base_url: 'git@git.fh-aachen.de:'
