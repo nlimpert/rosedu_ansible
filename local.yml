@@ -14,6 +14,11 @@
       update: yes
     register: robotiq
 
-  - name: Create crontab entry to clone/pull git repository
-    template: src=templates/testfile.j2 dest={{ ansible_env.HOME }}/Desktop/testfile owner=root group=root mode=0644
+    #  - name: Create crontab entry to clone/pull git repository
+    #    template: src=templates/testfile.j2 dest={{ ansible_env.HOME }}/Desktop/testfile owner=root group=root mode=0644
+
+  - name: remove file from desktop
+    file:
+      state: absent
+      path: "{{ ansible_env.HOME }}/Desktop/testfile"
 
