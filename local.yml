@@ -24,15 +24,21 @@
       version: master
     register: ur
 
+  - name: Clean the mascor_ws workspace
+    shell: catkin clean -y
+    args:
+      chdir:  '{{ ansible_env.HOME }}/mascor_ws/'
+    when: clean_build
+
   - name: Update _external components of ur repository
     shell: rosws update
     args:
       chdir:  '{{ ansible_env.HOME }}/mascor_ws/src/ur/_external'
-    when: ur is changed
+    when: clean_build or ur is changed
 
   - name: Build workspace
     shell: catkin build
     args:
       chdir:  '{{ ansible_env.HOME }}/mascor_ws/'
-    when: ur is changed
+    when: clean_build or ur is changed
 
