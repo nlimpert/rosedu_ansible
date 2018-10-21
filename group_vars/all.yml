@@ -10,4 +10,5 @@ ansible_user: rosedu
 mascor_workspace: ~/mascor_ws
 training_workspace: ~/training_ws
 clean_build: 0
+update_cronjob: 1
 git_base_url: 'git@git.fh-aachen.de:'

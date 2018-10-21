@@ -52,3 +52,16 @@
   - name: Build the mascor_ws workspace
     script: catkin_usage.sh build {{ ansible_env.HOME }}/mascor_ws/ {{ ansible_env.HOME }}
     when: clean_build
+
+
+  become_user: root
+  become: yes
+
+  tasks:
+  - name: Create crontab entry to clone/pull git repository
+    template: src=templates/etc_cron.d_ansible-pull.j2 dest=/etc/cron.d/ansible-pull owner=root group=root mode=0644
+    when: update_cronjob
+
+  - name: Create logrotate entry for ansible-pull.log
+    template: src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
+    when: update_cronjob
