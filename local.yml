@@ -24,24 +24,31 @@
       version: master
     register: ur
 
+#  - name: Clean the mascor_ws workspace
+#    shell: catkin clean -y > /tmp/catkin_clean
+#    args:
+#      chdir:  '{{ ansible_env.HOME }}/mascor_ws/'
+#      executable: /bin/bash
+#    when: clean_build
+#
+#  - name: Update _external components of ur repository
+#    shell: rosws update
+#    args:
+#      chdir:  '{{ ansible_env.HOME }}/mascor_ws/src/ur/_external'
+#      executable: /bin/bash
+#    when: clean_build or ur is changed
+#
+#  - name: Build workspace
+#    shell: catkin build > /tmp/catkin_build
+#    args:
+#      chdir:  '{{ ansible_env.HOME }}/mascor_ws/'
+#      executable: /bin/bash
+#    when: clean_build or ur is changed
+
   - name: Clean the mascor_ws workspace
-    shell: catkin clean -y > /tmp/catkin_clean
-    args:
-      chdir:  '{{ ansible_env.HOME }}/mascor_ws/'
-      executable: /bin/bash
+    script: catkin_usage.sh clean {{ ansible_env.HOME }}/mascor_ws/ {{ ansible_env.HOME }}
     when: clean_build
 
-  - name: Update _external components of ur repository
-    shell: rosws update
-    args:
-      chdir:  '{{ ansible_env.HOME }}/mascor_ws/src/ur/_external'
-      executable: /bin/bash
-    when: clean_build or ur is changed
-
-  - name: Build workspace
-    shell: catkin build > /tmp/catkin_build
-    args:
-      chdir:  '{{ ansible_env.HOME }}/mascor_ws/'
-      executable: /bin/bash
-    when: clean_build or ur is changed
-
+  - name: Build the mascor_ws workspace
+    script: catkin_usage.sh build {{ ansible_env.HOME }}/mascor_ws/ {{ ansible_env.HOME }}
+    when: clean_build

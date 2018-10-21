@@ -9,5 +9,5 @@ repo_url: https://github.com/nlimpert/rosin_ansible.git
 ansible_user: rosedu
 mascor_workspace: ~/mascor_ws
 training_workspace: ~/training_ws
-clean_build: 1
+clean_build: 0
 git_base_url: 'git@git.fh-aachen.de:'
