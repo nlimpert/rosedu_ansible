@@ -54,23 +54,23 @@
     when: clean_build
 
 
-  become_user: root
-  become: yes
-
-  tasks:
-  - name: Create crontab entry to clone/pull git repository
-    template: src=templates/etc_cron.d_ansible-pull.j2 dest=/etc/cron.d/ansible-pull owner=root group=root mode=0644
-    when: update_cronjob
-
-  - name: Create logrotate entry for ansible-pull.log
-    template: src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
-    when: update_cronjob
-
-  - name: Remove unneeded swap info in fstab
-    copy: 
-      src: files/fstab
-      dest: /etc/fstab
-      owner: root
-      group: root
-      mode: 0644
-    when: update_fstab
+#  become_user: root
+#  become: yes
+#
+#  tasks:
+#  - name: Create crontab entry to clone/pull git repository
+#    template: src=templates/etc_cron.d_ansible-pull.j2 dest=/etc/cron.d/ansible-pull owner=root group=root mode=0644
+#    when: update_cronjob
+#
+#  - name: Create logrotate entry for ansible-pull.log
+#    template: src=templates/etc_logrotate.d_ansible-pull.j2 dest=/etc/logrotate.d/ansible-pull owner=root group=root mode=0644
+#    when: update_cronjob
+#
+#  - name: Remove unneeded swap info in fstab
+#    copy: 
+#      src: files/fstab
+#      dest: /etc/fstab
+#      owner: root
+#      group: root
+#      mode: 0644
+#    when: update_fstab
